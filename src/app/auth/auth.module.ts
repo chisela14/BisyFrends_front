@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyComponent } from './verify/verify.component';
+import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { VerifyComponent } from './verify/verify.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    HomeModule
   ],
   exports: [
     LoginComponent,
