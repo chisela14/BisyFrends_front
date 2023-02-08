@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GroupRoutingModule } from './group-routing.module';
-import { GroupInfoComponent } from './group-info/group-info.component';
-import { GroupListComponent } from './group-list/group-list.component';
-import { EventDatatableComponent } from './event-datatable/event-datatable.component';
-import { SearchComponent } from './search/search.component';
-import { AddGroupComponent } from './add-group/add-group.component';
-import { UpdateGroupComponent } from './update-group/update-group.component';
-
+import { GroupInfoComponent } from './components/group-info/group-info.component';
+import { GroupListComponent } from './components/group-list/group-list.component';
+import { EventDatatableComponent } from './components/event-datatable/event-datatable.component';
+import { SearchComponent } from './components/search/search.component';
+import { AddGroupComponent } from './pages/add-group/add-group.component';
+import { UpdateGroupComponent } from './pages/update-group/update-group.component';
+import { ShowGroupsComponent } from './pages/show-groups/show-groups.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { UpdateGroupComponent } from './update-group/update-group.component';
     EventDatatableComponent,
     SearchComponent,
     AddGroupComponent,
-    UpdateGroupComponent
+    UpdateGroupComponent,
+    ShowGroupsComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { UpdateGroupComponent } from './update-group/update-group.component';
     EventDatatableComponent,
     SearchComponent,
     AddGroupComponent,
-    UpdateGroupComponent
+    UpdateGroupComponent,
+    ShowGroupsComponent
   ]
 })
 export class GroupModule { }

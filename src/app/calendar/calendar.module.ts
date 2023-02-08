@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
-import { MainCalendarComponent } from './main-calendar/main-calendar.component';
-import { SmallCalendarComponent } from './small-calendar/small-calendar.component';
-import { SettingsComponent } from './settings/settings.component';
-import { AddEventComponent } from './add-event/add-event.component';
-import { UpdateEventComponent } from './update-event/update-event.component';
+import { ShowCalendarComponent } from './pages/show-calendar/show-calendar.component';
+import { SmallCalendarComponent } from './components/small-calendar/small-calendar.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AddEventComponent } from './pages/add-event/add-event.component';
+import { UpdateEventComponent } from './pages/update-event/update-event.component';
 
 
 @NgModule({
   declarations: [
-    MainCalendarComponent,
+    ShowCalendarComponent,
     SmallCalendarComponent,
     SettingsComponent,
     AddEventComponent,
@@ -22,7 +22,7 @@ import { UpdateEventComponent } from './update-event/update-event.component';
     CalendarRoutingModule
   ],
   exports: [
-    MainCalendarComponent,
+    ShowCalendarComponent,
     SmallCalendarComponent,
     SettingsComponent,
     AddEventComponent,

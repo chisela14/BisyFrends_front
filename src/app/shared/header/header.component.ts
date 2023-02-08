@@ -10,5 +10,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  //atributo temporal para ver la estructura
+  registered: boolean = true;
 
 }

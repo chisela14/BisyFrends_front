@@ -4,7 +4,7 @@ import { ErrorComponent } from './shared/error/error.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'home', //hace falta?
     loadChildren: ()=> import('./home/home.module').then(m => m.HomeModule) 
   },
   {

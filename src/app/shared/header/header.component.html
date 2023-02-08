@@ -1,1 +1,20 @@
-<p>header works!</p>
+<nav class="navbar navbar-light bg-light" *ngIf="registered"><!--Se muestra si el usuario está registrado-->
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home']">logo</a>
+        <div>
+            <a class="navbar-brand" [routerLink]="['/schedule']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">agenda</a>
+            <a class="navbar-brand" [routerLink]="['/groups']" routerLinkActive="active">grupos</a> 
+        </div>
+        <a class="navbar-brand" [routerLink]="['/user']" routerLinkActive="active">usuario</a><!--dropdown con settings y logout-->
+    </div>
+</nav>
+
+<nav class="navbar navbar-light bg-light" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home']">logo</a>
+        <div>
+            <a class="navbar-brand" [routerLink]="['/login']" routerLinkActive="active"><button class="btn btn-secondary">Iniciar sesión</button></a>
+            <a class="navbar-brand" [routerLink]="['/register']" routerLinkActive="active"><button class="btn btn-primary">Registrarse</button></a>
+        </div>
+    </div>
+</nav>
