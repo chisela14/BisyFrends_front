@@ -3,19 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { ShowCalendarComponent } from './pages/show-calendar/show-calendar.component';
-import { SmallCalendarComponent } from './components/small-calendar/small-calendar.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AddEventComponent } from './pages/add-event/add-event.component';
 import { UpdateEventComponent } from './pages/update-event/update-event.component';
+import { DayCalendarComponent } from './components/day-calendar/day-calendar.component';
+import { WeekCalendarComponent } from './components/week-calendar/week-calendar.component';
+import { MonthCalendarComponent } from './components/month-calendar/month-calendar.component';
+import { ShowEventComponent } from './pages/show-event/show-event.component';
 
 
 @NgModule({
   declarations: [
     ShowCalendarComponent,
-    SmallCalendarComponent,
     SettingsComponent,
     AddEventComponent,
-    UpdateEventComponent
+    UpdateEventComponent,
+    DayCalendarComponent,
+    WeekCalendarComponent,
+    MonthCalendarComponent,
+    ShowEventComponent
   ],
   imports: [
     CommonModule,
@@ -23,10 +29,13 @@ import { UpdateEventComponent } from './pages/update-event/update-event.componen
   ],
   exports: [
     ShowCalendarComponent,
-    SmallCalendarComponent,
     SettingsComponent,
     AddEventComponent,
-    UpdateEventComponent
+    UpdateEventComponent,
+    DayCalendarComponent,
+    WeekCalendarComponent,
+    MonthCalendarComponent,
+    ShowEventComponent
   ]
 })
 export class CalendarModule { }

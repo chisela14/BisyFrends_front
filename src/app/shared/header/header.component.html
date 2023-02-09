@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light" *ngIf="registered"><!--Se muestra si el usuario está registrado-->
+<nav class="navbar navbar-light bg-success" *ngIf="registered"><!--Se muestra si el usuario está registrado-->
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/home']">logo</a>
         <div>
@@ -9,7 +9,7 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-light bg-light" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->
+<nav class="navbar navbar-light bg-success" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/home']">logo</a>
         <div>

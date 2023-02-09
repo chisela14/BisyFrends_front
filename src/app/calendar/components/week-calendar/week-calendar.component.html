@@ -1,0 +1,21 @@
+<div class="container-fluid p-0 h-100 d-flex flex-column">
+    <div class="row">
+        <div class="d-flex">
+            <button class="btn btn-primary"><</button>
+            <h3>{{title}}</h3>
+            <button class="btn btn-primary">></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">vacío</div>
+        <div class="col">dias</div>
+    </div>
+    <div class="row flex-grow-1">
+        <div class="col-2">
+            <ol>
+                <div *ngFor="let hour of [].constructor(24); let i = index">{{i}}:00</div>
+            </ol>
+        </div>
+        <div class="col">tabla</div>
+    </div>
+</div>
