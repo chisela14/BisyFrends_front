@@ -1,21 +1,37 @@
 <div class="container-fluid p-0 h-100 d-flex flex-column">
     <div class="row">
-        <div class="d-flex">
-            <button class="btn btn-primary"><</button>
-            <h3>{{title}}</h3>
-            <button class="btn btn-primary">></button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Anterior semana" (click)="weekBefore()">
+                <i class="fa-solid fa-caret-left"></i></button>
+            <h3>{{title}}</h3><!--To do: primera mayus con css y espacio con las flechas-->
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Siguiente semana" (click)="weekAfter()">
+                <i class="fa-solid fa-caret-right"></i></button>
         </div>
     </div>
     <div class="row">
-        <div class="col-2">vacío</div>
-        <div class="col">dias</div>
-    </div>
-    <div class="row flex-grow-1">
-        <div class="col-2">
-            <ol>
-                <div *ngFor="let hour of [].constructor(24); let i = index">{{i}}:00</div>
-            </ol>
-        </div>
-        <div class="col">tabla</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td *ngFor="let day of focusedWeek">{{ day.toLocaleDateString('es', {weekday:'short'}) }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let hour of [].constructor(24); let i = index">
+                    <th>{{i}}:00</th>
+                    <td *ngFor="let hour of [].constructor(7)"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

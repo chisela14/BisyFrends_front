@@ -1,11 +1,28 @@
 <nav class="navbar navbar-light bg-success" *ngIf="registered"><!--Se muestra si el usuario está registrado-->
     <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/home']">logo</a>
+        <a class="navbar-brand" [routerLink]="['/home']">
+            <button class="btn btn-success" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+             logo   
+            </button>
+        </a>
         <div>
-            <a class="navbar-brand" [routerLink]="['/schedule']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">agenda</a>
-            <a class="navbar-brand" [routerLink]="['/groups']" routerLinkActive="active">grupos</a> 
+            <a class="navbar-brand" [routerLink]="['/schedule']">
+                <button class="btn btn-success" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+                    <i class="fa-solid fa-calendar"></i> Agenda</button>
+            </a>
+            <a class="navbar-brand" [routerLink]="['/groups']">
+                <button class="btn btn-success" routerLinkActive="btn-light">
+                    <i class="fa-solid fa-users"></i> Grupos</button>
+            </a> 
         </div>
-        <a class="navbar-brand" [routerLink]="['/user']" routerLinkActive="active">usuario</a><!--dropdown con settings y logout-->
+        <div>
+            <button class="btn btn-success" data-toggle="tooltip" title="Cambiar idioma de la página">
+                <i class="fa-solid fa-language"></i></button>
+            <a class="navbar-brand" [routerLink]="['/user']" >
+                <button class="btn btn-success" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa-solid fa-circle-user"></i> Usuario</button>
+            </a><!--dropdown con settings y logout-->
+        </div>
     </div>
 </nav>
 
@@ -13,6 +30,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/home']">logo</a>
         <div>
+            <button class="btn btn-success" data-toggle="tooltip" title="Cambiar idioma de la página">
+                <i class="fa-solid fa-language"></i></button>
             <a class="navbar-brand" [routerLink]="['/login']" routerLinkActive="active"><button class="btn btn-secondary">Iniciar sesión</button></a>
             <a class="navbar-brand" [routerLink]="['/register']" routerLinkActive="active"><button class="btn btn-primary">Registrarse</button></a>
         </div>
