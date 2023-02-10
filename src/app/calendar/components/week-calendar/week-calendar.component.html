@@ -1,10 +1,10 @@
 <div class="container-fluid p-0 h-100 d-flex flex-column">
     <div class="row">
         <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Anterior semana" (click)="weekBefore()">
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Anterior semana" (click)="changeWeek('-')">
                 <i class="fa-solid fa-caret-left"></i></button>
             <h3>{{title}}</h3><!--To do: primera mayus con css y espacio con las flechas-->
-            <button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Siguiente semana" (click)="weekAfter()">
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Siguiente semana" (click)="changeWeek('+')">
                 <i class="fa-solid fa-caret-right"></i></button>
         </div>
     </div>
@@ -13,17 +13,11 @@
             <thead>
                 <tr>
                     <td></td>
-                    <td *ngFor="let day of focusedWeek">{{ day.toLocaleDateString('es', {weekday:'short'}) }}</td>
+                    <td *ngFor="let day of focusedWeek"><span [ngClass]="{'text-danger': day.date.getTime() === today.getTime()}">{{day.day}}</span></td><!--cambiar estilo-->
                 </tr>
                 <tr>
                     <td></td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
+                    <td *ngFor="let day of focusedWeek"><span [ngClass]="{'text-danger': day.date.getTime() === today.getTime()}">{{day.number}}</span></td><!--cambiar estilo-->
                 </tr>
             </thead>
             <tbody>
