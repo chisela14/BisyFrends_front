@@ -1,1 +1,27 @@
-<p>month-calendar works!</p>
+<div class="container-fluid p-0 h-100 d-flex flex-column">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Mes anterior" (click)="changeMonth('-')">
+                <i class="fa-solid fa-caret-left"></i></button>
+            <h3>{{title}}</h3><!--To do: primera mayus con css y espacio con las flechas-->
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Siguiente mes" (click)="changeMonth('+')">
+                <i class="fa-solid fa-caret-right"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td *ngFor="let day of weekDays"><span [ngClass]="{'text-danger': day === today.toLocaleDateString('es', {weekday:'narrow'})}">{{day}}</span></td><!--cambiar estilo-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let week of [].constructor(monthWeeks)">
+                    <td *ngFor="let number of [].constructor(7); let i = index">
+                        <span [ngClass]="{'text-danger': number === today.getDate()}">{{i}}</span>
+                    </td><!--cambiar estilo-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -26,13 +26,14 @@ export class WeekCalendarComponent implements OnInit {
   }
 
   generateWeek(date:Date, lang:string){
-    this.title = date.toLocaleDateString('es', {month:'long', year:'numeric'});
+    this.title = date.toLocaleDateString(lang, {month:'long', year:'numeric'});
     let nextDate = date;
     let weekDay:WeekDay;
 
     for(let i=0; i<7; i++){
       let index = nextDate.getDay();
       let date = new Date(nextDate)
+
       //el calendario en español empieza en lunes
       if(lang==='es'){
         //creo un día utilizando la interfaz declarada al inicio de este componente con los valores del siguiente día a añadir
@@ -45,6 +46,7 @@ export class WeekCalendarComponent implements OnInit {
           this.focusedWeek.splice(index -1, 0, {...weekDay});
           nextDate.setDate(nextDate.getDate() + 1);
         }
+
       //el calendario en ingles empieza en domingo
       }else{
         weekDay = {day: nextDate.toLocaleDateString('eng', {weekday:'short'}), number: nextDate.getDate(), date: date};//enviar una copia no funciona, por qué?
