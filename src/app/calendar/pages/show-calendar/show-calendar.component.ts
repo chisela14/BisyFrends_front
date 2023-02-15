@@ -11,4 +11,8 @@ export class ShowCalendarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  view:string = "week";
+  setView(view:string){
+    this.view = view;
+  }
 }
