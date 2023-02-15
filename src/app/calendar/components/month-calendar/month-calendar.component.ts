@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-month-calendar',
@@ -22,68 +23,51 @@ export class MonthCalendarComponent implements OnInit {
     this.generateMonth(this.today);
   }
 
-  //generar mes en un mapa
+  //generar mes en un mapa a partir de una fecha
   generateMonth(date:Date){
-    let dateNumber = date.getDay();
-    let weeks = this.weekCount(date.getFullYear(), date.getMonth(), date.getDay());
-    let totalDays =  weeks* 7;
-    console.log(totalDays);
-    let prevMonthStart = new Date(date.getFullYear(), date.getMonth() -1, 0).getDate()-(dateNumber -2);//-1 por el indice(0 es domingo), -1 por el día que estamos
-    //console.log(prevMonthStart);
-    let monthDays = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
-    //console.log(monthDays)
-    let nextMonthDay:number = 1;
+    //número de semanas en un mes
+    let weeks = this.weekCount(date.getFullYear(), date.getMonth(), date.getDay()); 
+    //dias totales que se mostrarán
+    let totalDays =  weeks* 7; 
+    
+    //arreglos para que el 0 no estropee las matemáticas (diciembre y domingo tienen comportamientos especiales)
+    let dateNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();//weekday del primer día del mes
+    if(dateNumber===0){dateNumber=7;}
+    let prevMonthNumber = date.getMonth() -1;
+    let yearNumber = date.getFullYear();
+    if(prevMonthNumber===-1){
+      yearNumber = yearNumber -1;
+      prevMonthNumber = 11;
+    }
+
+    //calculo el primer día del calendario, que casi siempre será un día del mes anterior
+    let prevMonthStart = new Date(yearNumber, prevMonthNumber+1, 0).getDate()-(dateNumber-2);// -1 por el día que estamos, -1 por el que empieza
+    //variable que guarda el siguiente número del mes a poner en el calendario
+    let nextMonthDay:number = prevMonthStart;
+    //array con el mes que luego se pasará a un mapa
     let monthArray: Date[] = [];
     for(let i=0; i<totalDays; i++){
       let nextDay: Date;
-      if(i<dateNumber ){
-        nextDay = new Date(date.getFullYear(), date.getMonth() -1, prevMonthStart);
-        prevMonthStart += 1;
-      }else if(i>monthDays+dateNumber-1){
-        nextDay = new Date(date.getFullYear(), date.getMonth() +1, nextMonthDay);
-        nextMonthDay += 1;
-      }else{//i >= dateNumber
-        nextDay = new Date(date.getFullYear(), date.getMonth(), i-(dateNumber-1));
-        prevMonthStart += 1;
+      if(i<dateNumber-1){
+        nextDay = new Date(yearNumber, prevMonthNumber, nextMonthDay);
+      }else{
+        if(i==dateNumber-1){//cuando la i llegue a la posición donde ira el 1
+          nextMonthDay = 1;
+        }
+        nextDay = new Date(date.getFullYear(), date.getMonth(), nextMonthDay);
       }
+      nextMonthDay += 1;
       monthArray.push(nextDay)
     }
-
-    let monthWeeksIndex = Math.ceil(monthArray.length / weeks);
+    console.log(monthArray)
+    //introduzco el array del mes en el mapa
     for(let i=0; i<weeks; i++){
-        let lastPart = monthArray.splice(-monthWeeksIndex);
+        let lastPart = monthArray.splice(0,7);
         this.focusedMonth.set(i, lastPart);
     }
-    console.log(this.focusedMonth)
   }
 
-  //genera un mes mas los días del anterior y el siguiente que sean necesarios para completar una tabla de 7* número de semanas
-  // generateMonth(date:Date){
-  //   let dateNumber = date.getDay();
-  //   let totalDays = this.weekCount(date.getFullYear(), date.getMonth(), date.getDay()) * 7;
-  //   console.log(totalDays);
-  //   let prevMonthStart = new Date(date.getFullYear(), date.getMonth() -1, 0).getDate()-(dateNumber -2);//-1 por el indice(0 es domingo), -1 por el día que estamos
-  //   //console.log(prevMonthStart);
-  //   let monthDays = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
-  //   //console.log(monthDays)
-  //   let nextMonthDay:number = 1;
-  //   for(let i=0; i<totalDays; i++){
-  //     let nextDay: Date;
-  //     if(i<dateNumber ){
-  //       nextDay = new Date(date.getFullYear(), date.getMonth() -1, prevMonthStart);
-  //       prevMonthStart += 1;
-  //     }else if(i>monthDays+dateNumber-1){
-  //       nextDay = new Date(date.getFullYear(), date.getMonth() +1, nextMonthDay);
-  //       nextMonthDay += 1;
-  //     }else{//i >= dateNumber
-  //       nextDay = new Date(date.getFullYear(), date.getMonth(), i-(dateNumber-1));
-  //       prevMonthStart += 1;
-  //     }
-  //     this.focusedMonth.push(nextDay)
-  //   }
-  //   console.log(this.focusedMonth)
-  // }
-  
+  //podría buscar una forma más eficaz de conseguir el texto de los días de la semana y el título
   title!:string;
   generateWeek(date:Date, lang:string):string[]{
     this.title = date.toLocaleDateString(lang, {month:'long', year:'numeric'});
@@ -125,18 +109,17 @@ export class MonthCalendarComponent implements OnInit {
   }
 
 
-  // changeMonth(operator:string){
-  //   let week = this.focusedMonth.get(2);
-  //   //creo la fecha de inicio a partir del primer elemento de la semana mostrada actualmente
-  //   let newMonth:Date = new Date(week[0]); 
-  //   if(operator==='-'){
-  //     newMonth.setMonth(newMonth.getMonth());
-  //   }else{ //operator==='+'
-  //     newMonth.setMonth(newMonth.getMonth()+1);
-  //     //newMonth = new Date(this.focusedMonth[10].getMonth() +1);
-  //   }
-  //   console.log(newMonth)
-  //   this.generateMonth(newMonth);
-  // }
+  changeMonth(operator:string){
+    let week: Date[] | undefined = this.focusedMonth.get(1);
+    let newMonth = week![0]; 
+    if(operator==='-'){
+      newMonth.setMonth(newMonth.getMonth()-1);
+    }else{ //operator==='+'
+      newMonth.setMonth(newMonth.getMonth()+1);
+    }
+    this.focusedMonth.clear();
+    this.generateWeek(newMonth, 'es');
+    this.generateMonth(newMonth);
+  }
 
 }
