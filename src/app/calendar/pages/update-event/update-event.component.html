@@ -1,1 +1,112 @@
-<p>update-event works!</p>
+<h2>Editar evento</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="updateEvForm" autocomplete="off" (ngSubmit)="save()">
+            <!-- Event name -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="ejemplo: Cumpleaños de Miguel"
+                           formControlName="name">
+                     
+                    <span class="form-text text-danger" *ngIf="isNotValid('name')">
+                        Debe tener al menos 5 caracteres
+                    </span>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Información</label>
+                <div class="col-sm-9">
+                    <textarea 
+                           class="form-control"
+                           placeholder="Añade información adicional"
+                           formControlName="info"></textarea>
+                    
+                </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Duración</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Introduce el número de horas"
+                           formControlName="duration">
+                        
+                    <span class="form-text text-danger" *ngIf="isNotValid('duration')">
+                        Debe ser un número mayor que cero
+                    </span>
+                </div>
+            </div>
+
+            <!-- Attendance -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Porcentaje de asistencia</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="100"
+                           formControlName="attendance">
+                        
+                    <span class="form-text text-danger" *ngIf="isNotValid('attendance')">
+                        Debe ser un número mayor o igual que cero
+                    </span>
+                </div>
+            </div>
+
+            <!-- final date -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Fecha</label>
+                <div class="col-sm-9">
+                    <input type="datetime-local"
+                           class="form-control"
+                           formControlName="date">
+                     
+                    <span class="form-text text-danger" *ngIf="isNotValid('date')">
+                        La fecha debe ser igual o mayor a la fecha de hoy
+                    </span>
+                </div>
+            </div>
+            <!-- Group -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Grupo</label>
+                <div class="col-sm-9">
+                    <select class="form-select" formControlName="group">
+                        <option value="default">Selecciona un grupo...</option>
+                        <option *ngFor="let group of groups" value="group">{{group}}</option>
+                    </select>
+                     
+                    <span class="form-text text-danger" *ngIf="isNotValid('group')">
+                        Este campo es obligatorio
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                            <!--[disabled]="myForm.invalid" también es una forma-->
+                        Guardar
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary float-end"
+                            [routerLink]="['/schedule']">
+                        Volver
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+

@@ -7,6 +7,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddEventComponent implements OnInit {
 
+  constructor(private fb:FormBuilder) { }
+
   addEvForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     info: [''],
@@ -30,8 +32,6 @@ export class AddEventComponent implements OnInit {
 
   //para probar el select
   groups: string[] = ["daw", "fotografía"];
-
-  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }

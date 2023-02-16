@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from 'src/app/interfaces/event.interface';
 
 export interface DateEvent{
   date: Date,
-  event: boolean
-}//cambiar tipo event a tipo Event
+  event: Event | null
+}
 
 @Component({
   selector: 'app-month-calendar',
@@ -63,7 +64,7 @@ export class MonthCalendarComponent implements OnInit {
         nextDay = new Date(date.getFullYear(), date.getMonth(), nextMonthDay);
       }
       nextMonthDay += 1;
-      dateEvent = {date: nextDay, event: false}
+      dateEvent = {date: nextDay, event: null}
       monthArray.push(dateEvent)
     }
     //introduzco el array del mes en el mapa
@@ -128,10 +129,23 @@ export class MonthCalendarComponent implements OnInit {
     this.generateMonth(newMonth);
   }
 
+  testEvent: Event = {
+    id: 1,
+    name: 'Cena',
+    info: 'En el bar Manolo',
+    duration: 2,
+    attendance: 100,
+    date: new Date('2023-02-17'),
+    group: {
+      name: 'daw', 
+      description: 'desarrollo de aplicaciones web', 
+      participants: [{username: 'ioliasa', picture: ''}]
+    }
+  };
   //función para añadir los eventos del usuario al array
   setEvents(){
     let week: DateEvent[] | undefined = this.focusedMonth.get(1);
-    week![0].event = true;
+    week![0].event = this.testEvent;
     this.focusedMonth.set(1, week!);
   }
 

@@ -18,10 +18,16 @@
             <tbody>
                 <tr *ngFor="let week of focusedMonth.keys()">
                     <td *ngFor="let day of focusedMonth.get(week)" [ngClass]="{'bg-warning': day.event}">
-                        <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">
-                            {{day.date.getDate()}}
-                        </span>
-                        <a routerLink="updateEvent/1" *ngIf="day.event"></a>
+                        <div *ngIf="day.event != null">
+                            <a routerLink="day.event.id"><!--event-->
+                                <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">
+                                    {{day.date.getDate()}}
+                                </span>
+                            </a>
+                        </div>
+                        <div *ngIf="day.event == null">
+                            <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">{{day.date.getDate()}}</span>
+                        </div>
                     </td><!--cambiar estilo-->
                 </tr>
             </tbody>
