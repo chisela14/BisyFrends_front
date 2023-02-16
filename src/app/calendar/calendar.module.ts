@@ -10,6 +10,7 @@ import { DayCalendarComponent } from './components/day-calendar/day-calendar.com
 import { WeekCalendarComponent } from './components/week-calendar/week-calendar.component';
 import { MonthCalendarComponent } from './components/month-calendar/month-calendar.component';
 import { ShowEventComponent } from './pages/show-event/show-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ShowEventComponent } from './pages/show-event/show-event.component';
   ],
   imports: [
     CommonModule,
-    CalendarRoutingModule
+    CalendarRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     ShowCalendarComponent,

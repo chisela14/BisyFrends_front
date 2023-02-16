@@ -3,18 +3,18 @@
         espacio?
     </div>
     <div class="row flex-grow-1">
-        <div class="col-10" [ngSwitch]="view">
+        <div class="col-9" [ngSwitch]="view">
             <app-week-calendar *ngSwitchCase="'week'"></app-week-calendar>
             <app-day-calendar *ngSwitchCase="'day'"></app-day-calendar>
             <app-month-calendar *ngSwitchCase="'month'"></app-month-calendar>
 
         </div>
         <div class="col d-flex flex-column">
-            <div class="row flex-grow-1">
-                <app-settings (changeView)="setView($event)"></app-settings>
-            </div>
             <div class="row">
                 <app-month-calendar></app-month-calendar>
+            </div>
+            <div class="row flex-grow-1">
+                <app-settings (changeView)="setView($event)"></app-settings>
             </div>
         </div>
     </div>

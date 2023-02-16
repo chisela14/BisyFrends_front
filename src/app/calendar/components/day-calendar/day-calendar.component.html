@@ -1,1 +1,21 @@
-<p>day-calendar works!</p>
+<div class="container-fluid p-0 h-100 d-flex flex-column">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Día anterior" (click)="changeDay('-')">
+                <i class="fa-solid fa-caret-left"></i></button>
+            <h3>{{title}}</h3><!--To do: primera mayus con css y espacio con las flechas-->
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Siguiente día" (click)="changeDay('+')">
+                <i class="fa-solid fa-caret-right"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let hour of [].constructor(24); let i = index">
+                    <th>{{i}}:00</th>
+                    <td *ngFor="let hour of [].constructor(7)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

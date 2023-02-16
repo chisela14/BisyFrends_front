@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { last } from 'rxjs';
+
+export interface DateEvent{
+  date: Date,
+  event: boolean
+}//cambiar tipo event a tipo Event
 
 @Component({
   selector: 'app-month-calendar',
@@ -15,12 +19,13 @@ export class MonthCalendarComponent implements OnInit {
 
   weekDays: string[] = [];
   //focusedMonth: Date[] = [];
-  focusedMonth:Map<Number, Date[]> = new Map<Number, Date[]>();
+  focusedMonth:Map<Number, DateEvent[]> = new Map<Number, DateEvent[]>();
   monthWeeks: number = 4;
   ngOnInit(): void {
     this.weekDays = this.generateWeek(this.today, 'es');
     this.monthWeeks = this.weekCount(this.today.getFullYear(), this.today.getMonth(), this.today.getDay());
     this.generateMonth(this.today);
+    this.setEvents();
   }
 
   //generar mes en un mapa a partir de una fecha
@@ -45,9 +50,10 @@ export class MonthCalendarComponent implements OnInit {
     //variable que guarda el siguiente número del mes a poner en el calendario
     let nextMonthDay:number = prevMonthStart;
     //array con el mes que luego se pasará a un mapa
-    let monthArray: Date[] = [];
+    let monthArray: DateEvent[] = [];
     for(let i=0; i<totalDays; i++){
       let nextDay: Date;
+      let dateEvent: DateEvent;
       if(i<dateNumber-1){
         nextDay = new Date(yearNumber, prevMonthNumber, nextMonthDay);
       }else{
@@ -57,9 +63,9 @@ export class MonthCalendarComponent implements OnInit {
         nextDay = new Date(date.getFullYear(), date.getMonth(), nextMonthDay);
       }
       nextMonthDay += 1;
-      monthArray.push(nextDay)
+      dateEvent = {date: nextDay, event: false}
+      monthArray.push(dateEvent)
     }
-    console.log(monthArray)
     //introduzco el array del mes en el mapa
     for(let i=0; i<weeks; i++){
         let lastPart = monthArray.splice(0,7);
@@ -110,8 +116,8 @@ export class MonthCalendarComponent implements OnInit {
 
 
   changeMonth(operator:string){
-    let week: Date[] | undefined = this.focusedMonth.get(1);
-    let newMonth = week![0]; 
+    let week: DateEvent[] | undefined = this.focusedMonth.get(1);
+    let newMonth = week![0].date; 
     if(operator==='-'){
       newMonth.setMonth(newMonth.getMonth()-1);
     }else{ //operator==='+'
@@ -120,6 +126,13 @@ export class MonthCalendarComponent implements OnInit {
     this.focusedMonth.clear();
     this.generateWeek(newMonth, 'es');
     this.generateMonth(newMonth);
+  }
+
+  //función para añadir los eventos del usuario al array
+  setEvents(){
+    let week: DateEvent[] | undefined = this.focusedMonth.get(1);
+    week![0].event = true;
+    this.focusedMonth.set(1, week!);
   }
 
 }
