@@ -14,16 +14,16 @@ const routes: Routes = [
         component: ShowCalendarComponent
       },
       {
+        path:'addEvent',
+        component: AddEventComponent
+      },
+      {
         path:':event',
         component: ShowEventComponent
       },
       {
         path:':event/update',
         component: UpdateEventComponent
-      },
-      {
-        path:'addEvent',
-        component: AddEventComponent
       }
     ]
   }

@@ -80,7 +80,7 @@
                 <div class="col-sm-9">
                     <select class="form-select" formControlName="group">
                         <option value="default">Selecciona un grupo...</option>
-                        <option *ngFor="let group of groups" value="group">{{group}}</option>
+                        <option *ngFor="let group of groups" value="group.name">{{group.name}}</option>
                     </select>
                      
                     <span class="form-text text-danger" *ngIf="isNotValid('group')">

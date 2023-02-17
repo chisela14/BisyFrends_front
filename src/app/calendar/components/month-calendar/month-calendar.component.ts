@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/interfaces/event.interface';
+import { EventService } from '../../services/event.service';
 
 export interface DateEvent{
   date: Date,
@@ -12,8 +13,12 @@ export interface DateEvent{
 })
 export class MonthCalendarComponent implements OnInit {
 
+  //hasta que recupere los datos de la api
+  testEvent: Event = this.eventService.getEvents()[0];
+
+
   today: Date;
-  constructor() {
+  constructor(private eventService:EventService) {
     this.today = new Date();
     //this.today = new Date(Date.parse('01/14/2023'));//prueba
   }
@@ -129,19 +134,6 @@ export class MonthCalendarComponent implements OnInit {
     this.generateMonth(newMonth);
   }
 
-  testEvent: Event = {
-    id: 1,
-    name: 'Cena',
-    info: 'En el bar Manolo',
-    duration: 2,
-    attendance: 100,
-    date: new Date('2023-02-17'),
-    group: {
-      name: 'daw', 
-      description: 'desarrollo de aplicaciones web', 
-      participants: [{username: 'ioliasa', picture: ''}]
-    }
-  };
   //función para añadir los eventos del usuario al array
   setEvents(){
     let week: DateEvent[] | undefined = this.focusedMonth.get(1);

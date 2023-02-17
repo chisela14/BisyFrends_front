@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Group } from 'src/app/interfaces/group.interface';
+import { GroupService } from '../../../group/services/group.service';
 
 @Component({
   selector: 'app-add-event',
@@ -7,7 +9,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddEventComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
+
+  //para probar el select
+  groups: Group[] = this.groupService.getGroups();
+
+  constructor(private fb:FormBuilder, private groupService:GroupService) { }
 
   addEvForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -29,9 +35,6 @@ export class AddEventComponent implements OnInit {
     }
     return null;
   }
-
-  //para probar el select
-  groups: string[] = ["daw", "fotografía"];
 
   ngOnInit(): void {
   }
