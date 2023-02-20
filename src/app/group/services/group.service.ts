@@ -28,4 +28,14 @@ export class GroupService {
   getGroups():Group[]{
     return this.groups;
   }
+  
+  searchGroups(query:string){
+    let matchedGroups: Group[] = [];
+    for(let group of this.groups){
+      if(group.name.toLowerCase().includes(query)){
+        matchedGroups.push(group)
+      }
+    }
+    return matchedGroups;
+  }
 }

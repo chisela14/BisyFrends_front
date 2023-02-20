@@ -1,1 +1,4 @@
-<p>search works!</p>
+<form (ngSubmit)="search()">
+    <input type="text" class="form-control"
+    placeholder="Buscar..." [(ngModel)]="query" name="busqueda">
+</form>

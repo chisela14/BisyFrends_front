@@ -1,1 +1,15 @@
-<p>show-groups works!</p>
+<div class="row h-100">
+   <div class="col-3 bg-warning">
+        <div class="row h-15">
+            <app-search (searchInput)="searchGroups($event)"></app-search>
+        </div>
+        <div class="row">
+            <app-group-list [groups]="groups" (selectedGroup)="setGroup($event)"></app-group-list>
+        </div>
+    </div>
+    <div class="col">
+        <div class="bg-dark h-100" *ngIf="!selectedGroup"></div>
+        <app-group-info *ngIf="selectedGroup" [group]="selectedGroup"></app-group-info>
+    </div> 
+</div>
+

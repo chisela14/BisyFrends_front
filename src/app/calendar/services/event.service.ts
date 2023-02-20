@@ -27,4 +27,14 @@ export class EventService {
   getEvents():Event[]{
     return this.events;
   }
+
+  searchEvents(query:string){
+    let matchedEvents: Event[] = [];
+    for(let event of this.events){
+      if(event.name.toLowerCase().includes(query)){
+        matchedEvents.push(event)
+      }
+    }
+    return matchedEvents;
+  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Group } from 'src/app/interfaces/group.interface';
 
 @Component({
   selector: 'app-group-info',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupInfoComponent implements OnInit {
 
+  @Input() group!:Group;
+  
   constructor() { }
 
   ngOnInit(): void {

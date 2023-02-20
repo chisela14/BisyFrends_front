@@ -9,6 +9,7 @@ import { SearchComponent } from './components/search/search.component';
 import { AddGroupComponent } from './pages/add-group/add-group.component';
 import { UpdateGroupComponent } from './pages/update-group/update-group.component';
 import { ShowGroupsComponent } from './pages/show-groups/show-groups.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShowGroupsComponent } from './pages/show-groups/show-groups.component';
   ],
   imports: [
     CommonModule,
-    GroupRoutingModule
+    GroupRoutingModule,
+    FormsModule
   ],
   exports: [
     GroupInfoComponent,
