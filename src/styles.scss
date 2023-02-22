@@ -1,0 +1,12 @@
+$light: #CCCCFF;
+$info: #CC99FF;
+$primary: #9999FF;
+$warning: #FFCC66;
+$dark: #333333;
+
+@import "bootstrap";
+
+:root{
+    --fontFamily: 'Work Sans';
+    --bs-body-font-family: var(--fontFamily);
+}

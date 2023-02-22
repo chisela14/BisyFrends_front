@@ -1,11 +1,14 @@
-<div class="row bg-primary">
-    <div class="col-1"><i class="fa-solid fa-users"></i></div>
-    <div class="col">
-        <div class="row">{{group.name}}</div>
-        <div class="row">{{group.participants.length}} miembros</div>
+<div class="row d-flex align-items-stretch">
+    <div class="row bg-dark text-white">
+        <div class="col-1"><i class="fa-solid fa-users"></i></div>
+        <div class="col">
+            <div class="row">{{group.name}}</div>
+            <div class="row">{{group.participants.length}} miembros</div>
+        </div>
+    </div>
+
+    <div class="row h-75">
+        <app-event-datatable [group]="group"></app-event-datatable>
     </div>
 </div>
 
-<div class="row flex-grow-1">
-    <app-event-datatable [group]="group"></app-event-datatable>
-</div>

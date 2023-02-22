@@ -1,3 +1,6 @@
-<div *ngFor="let group of groups" (click)="focusGroup(group)">
-    {{group.name}}
-</div>
+<ul class="nav nav-pills flex-column">
+   <li *ngFor="let group of groups" (click)="focusGroup(group)" class="nav-item">
+        <a class="nav-link">{{group.name}}</a>
+    </li> 
+</ul>
+

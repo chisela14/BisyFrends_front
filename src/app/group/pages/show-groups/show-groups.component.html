@@ -1,14 +1,14 @@
-<div class="row h-100">
-   <div class="col-3 bg-warning">
-        <div class="row h-15">
+<div class="row h-100 mt-4 gx-5">
+   <div class="col-3">
+        <div class="row">
             <app-search (searchInput)="searchGroups($event)"></app-search>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <app-group-list [groups]="groups" (selectedGroup)="setGroup($event)"></app-group-list>
         </div>
     </div>
     <div class="col">
-        <div class="bg-dark h-100" *ngIf="!selectedGroup"></div>
+        <div *ngIf="!selectedGroup"> <- selecciona un grupo</div>
         <app-group-info *ngIf="selectedGroup" [group]="selectedGroup"></app-group-info>
     </div> 
 </div>

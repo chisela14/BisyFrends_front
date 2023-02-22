@@ -1,8 +1,19 @@
-<div>
-    <button class="btn btn-primary" (click)="view('day')"><i class="fa-solid fa-calendar-day"></i>Día</button>
-    <button class="btn btn-primary" (click)="view('week')"><i class="fa-solid fa-calendar-week"></i>Semana</button>
-    <button class="btn btn-primary" (click)="view('month')"><i class="fa-solid fa-calendar-days"></i>Mes</button>
+<div class="row gx-0 d-flex justify-content-around">
+    <div class="col-auto">
+        <button class="btn btn-primary" (click)="view('day')"><i class="fa-solid fa-calendar-day"></i> Día</button>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" (click)="view('week')"><i class="fa-solid fa-calendar-week"></i> Semana</button>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" (click)="view('month')"><i class="fa-solid fa-calendar-days"></i> Mes</button>
+    </div>
 </div>
-<div>
-    <button class="btn btn-success" [routerLink]="['addEvent']"><i class="fa-solid fa-calendar-plus"></i>Añadir evento</button>
+<div class="row mt-2">
+    <div class="col-auto">
+        <button class="btn btn-warning" [routerLink]="['addEvent']"><i class="fa-solid fa-calendar-plus"></i> Añadir evento</button>
+    </div>
+    <div class="col-auto">
+        filtros
+    </div>
 </div>
