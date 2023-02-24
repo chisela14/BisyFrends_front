@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyComponent } from './verify/verify.component';
 import { HomeModule } from '../home/home.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HomeModule } from '../home/home.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    HomeModule
+    HomeModule,
+    FormsModule
   ],
   exports: [
     LoginComponent,

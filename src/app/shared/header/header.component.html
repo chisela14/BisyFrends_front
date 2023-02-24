@@ -26,14 +26,18 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-light bg-success" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->
+<nav class="navbar navbar-light bg-primary" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->
     <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/home']">logo</a>
+        <a class="navbar-brand" [routerLink]="['/home']">
+            <button class="btn btn-dark" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+                logo   
+            </button>
+        </a>
         <div>
-            <button class="btn btn-success" data-toggle="tooltip" title="Cambiar idioma de la página">
+            <button class="btn btn-primary" data-toggle="tooltip" title="Cambiar idioma de la página">
                 <i class="fa-solid fa-language"></i></button>
-            <a class="navbar-brand" [routerLink]="['/login']" routerLinkActive="active"><button class="btn btn-secondary">Iniciar sesión</button></a>
-            <a class="navbar-brand" [routerLink]="['/register']" routerLinkActive="active"><button class="btn btn-primary">Registrarse</button></a>
+            <a class="navbar-brand" [routerLink]="['/login']" routerLinkActive="active"><button class="btn btn-dark">Iniciar sesión</button></a>
+            <a class="navbar-brand" [routerLink]="['/register']" routerLinkActive="active"><button class="btn btn-warning">Registrarse</button></a>
         </div>
     </div>
 </nav>
