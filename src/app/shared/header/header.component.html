@@ -15,15 +15,22 @@
                     <i class="fa-solid fa-users"></i> Grupos</button>
             </a> 
         </div>
-        <div>
-            <button class="btn btn-primary" data-toggle="tooltip" title="Cambiar idioma de la página">
-                <i class="fa-solid fa-language"></i></button>
-            <a class="navbar-brand" [routerLink]="['/user']" >
-                <button class="btn btn-primary" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
-                <i class="fa-solid fa-circle-user"></i> Usuario</button>
-            </a><!--dropdown con settings y logout-->
+        
+            
+        <div class="dropdown">
+            <!-- <button class="btn btn-primary" data-toggle="tooltip" title="Cambiar idioma de la página">
+                <i class="fa-solid fa-language"></i></button> -->
+            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+            <i class="fa-solid fa-circle-user"></i> Usuario</button>
+
+            <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="['/user']">Configuración</a>
+                <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
+            </div>
         </div>
+
     </div>
+   
 </nav>
 
 <nav class="navbar navbar-light bg-primary" *ngIf="!registered"><!--Se muestra si el usuario no está registrado-->

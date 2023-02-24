@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthResponse } from './interfaces/auth-response';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -30,10 +29,10 @@ export class AuthService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Content-type','application/json');
 
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/signin`, {username, password}, {headers})
+    return this.http.post(`${environment.apiUrl}/signin`, {username, password}, {headers})
     .subscribe({
       next: (token) => {
-        this.cookieService.set('token', token.access_token)
+        this.cookieService.set('token', token.toString())
         this.router.navigate(['/schedule'])
       },
       error: (err) => {
