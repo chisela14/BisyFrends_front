@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +10,25 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService, private router:Router) { }
 
-  registered!: boolean;
   ngOnInit(): void {
-    this.registered = this.authService.isAuthenticated();
   }
 
   logout(){
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  
+  setHeader(){
+    return this.authService.isAuthenticated();
+  }
+
+  onLoginPage():boolean{
+    let result = false;
+    if(this.router.url.includes('login')){
+      result = true;
+    }
+    return result;
   }
 
 }

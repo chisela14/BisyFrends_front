@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,8 @@ export class AuthService {
     .subscribe({
       next: (token) => {
         this.cookieService.set('token', token.toString())
-        this.router.navigate(['/schedule'])
+        this.router.navigate(['/schedule'], {skipLocationChange:false})
+        //this.router.navigateByUrl('/schedule');
       },
       error: (err) => {
         Swal.fire("Usuario o contraseña incorrectos")
