@@ -3,3 +3,11 @@ export interface UserGroup{
     username: string,
     picture: string
 }
+
+export interface User {
+    username: string,
+    password: string,
+    name:     string,
+    email:    string,
+    picture:  string
+}

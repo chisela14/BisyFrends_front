@@ -1,41 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Group } from 'src/app/interfaces/group.interface';
-import { UsersService } from '../../user/services/users.service';
-import { UserGroup } from '../../interfaces/user.interface';
+import { Group, GroupDto } from 'src/app/interfaces/group.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
 
-  //hasta que recupere los grupos de la api
-  users:UserGroup[] = this.userService.getUsers();
-  groups: Group[] = [
-    {
-      name: 'DAW', 
-      description: 'desarrollo de aplicaciones web', 
-      participants: this.users
-    },
-    {
-      name: 'fotografía', 
-      description: 'grupo amateur autodidacta', 
-      participants: this.users
-    }
-  ]
+  constructor(private http: HttpClient) { }
 
-  constructor(private userService:UsersService) { }
+  getGroup(id:number){
+    return this.http.get<Group>(`${environment.apiUrl}/group/${id}`);
+  }
 
-  getGroups():Group[]{
-    return this.groups;
+  getGroups(){
+    return this.http.get<GroupDto[]>(`${environment.apiUrl}/user/groups`);
   }
   
   searchGroups(query:string){
-    let matchedGroups: Group[] = [];
-    for(let group of this.groups){
-      if(group.name.toLowerCase().includes(query)){
-        matchedGroups.push(group)
-      }
-    }
-    return matchedGroups;
+    return this.http.get<GroupDto[]>(`${environment.apiUrl}/user/groups?q=${query}`);
   }
+  
 }

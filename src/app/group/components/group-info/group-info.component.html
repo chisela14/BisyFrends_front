@@ -3,7 +3,11 @@
         <div class="col-1"><i class="fa-solid fa-users"></i></div>
         <div class="col">
             <div class="row">{{group.name}}</div>
-            <div class="row">{{group.participants.length}} miembros</div>
+            <div class="row">
+                <span *ngFor="let participant of participants">
+                    {{participant.username}}
+                </span>
+            </div>
         </div>
     </div>
 

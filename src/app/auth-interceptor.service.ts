@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,7 +13,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string = this.cookieService.get('token');
-    if(token.length){
+    //if(token.length){
       let request = req;
       if (token) {
         request = req.clone({
@@ -21,10 +21,13 @@ export class AuthInterceptorService implements HttpInterceptor {
             authorization: `Bearer ${ token }`
           }
         });
+        //otra sintaxis
+        //const headers = new HttpHeaders({'Authorization': `Bearer ${ token }`})
+        //request = req.clone({headers})
       }
-    }
+    //}
 
-    return next.handle(req)
+    return next.handle(request)
     .pipe(catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.router.navigate(['/']);

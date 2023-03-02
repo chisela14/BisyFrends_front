@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from 'src/app/interfaces/group.interface';
+import Swal from 'sweetalert2';
 import { GroupService } from '../../../group/services/group.service';
+import { GroupDto } from '../../../interfaces/group.interface';
 
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html'
 })
 export class AddEventComponent implements OnInit {
-
-
-  //para probar el select
-  groups: Group[] = this.groupService.getGroups();
 
   constructor(private fb:FormBuilder, private groupService:GroupService) { }
 
@@ -36,7 +34,17 @@ export class AddEventComponent implements OnInit {
     return null;
   }
 
+   //para probar el select
+   groups!: GroupDto[];
+
   ngOnInit(): void {
+    this.groupService.getGroups()
+    .subscribe({
+      next:(resp)=>{this.groups=resp},
+      error:(err)=>{
+        Swal.fire("Fallo al recuperar los grupos de la api")
+      }
+    })
   }
 
   isNotValid(field:string){

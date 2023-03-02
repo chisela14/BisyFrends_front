@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Group } from 'src/app/interfaces/group.interface';
-import { GroupService } from '../../services/group.service';
+import { GroupDto } from '../../../interfaces/group.interface';
 
 @Component({
   selector: 'app-group-list',
@@ -8,14 +7,14 @@ import { GroupService } from '../../services/group.service';
 })
 export class GroupListComponent implements OnInit {
 
-  @Input() groups:Group[] = [];
+  @Input() groups:GroupDto[] = [];
   constructor() { }
 
   ngOnInit(): void {}
 
-  @Output() selectedGroup = new EventEmitter<Group>();
+  @Output() selectedGroup = new EventEmitter<GroupDto>();
 
-  focusGroup(g:Group){
+  focusGroup(g:GroupDto){
     this.selectedGroup.emit(g);
   }
 }

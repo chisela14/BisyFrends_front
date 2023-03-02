@@ -14,7 +14,14 @@ export interface DateEvent{
 export class MonthCalendarComponent implements OnInit {
 
   //hasta que recupere los datos de la api
-  testEvent: Event = this.eventService.getEvents()[0];
+  testEvent: Event = {
+    id: 1,
+    name: 'Cena',
+    info: 'En el bar Manolo',
+    duration: 2,
+    attendance: 100,
+    finalDate: new Date('2023-02-17')
+  };
 
 
   today: Date;

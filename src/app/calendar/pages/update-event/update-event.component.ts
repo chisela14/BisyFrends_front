@@ -23,12 +23,7 @@ export class UpdateEventComponent implements OnInit {
     info: 'En el bar Manolo',
     duration: 2,
     attendance: 100,
-    date: new Date('2023-02-17'),
-    group: {
-      name: 'daw', 
-      description: 'desarrollo de aplicaciones web', 
-      participants: [{username: 'ioliasa', picture: ''}]
-    }
+    finalDate: new Date('2023-02-17')
   };
 
   updateEvForm: FormGroup = this.fb.group({

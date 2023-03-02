@@ -1,40 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/interfaces/event.interface';
-import { GroupService } from '../../group/services/group.service';
+import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  //hasta que recupere los eventos de la api
-  groups = this.groupService.getGroups();
+  constructor(private http: HttpClient) { }
 
-  events:Event[] = [
-    {
-      id: 1,
-      name: 'Cena',
-      info: 'En el bar Manolo',
-      duration: 2,
-      attendance: 100,
-      date: new Date('2023-02-17'),
-      group: this.groups[0]
-    }
-  ]
-
-  constructor(private groupService: GroupService) { }
-
-  getEvents():Event[]{
-    return this.events;
+  //get /event/{event_id}
+  getEvent(id:number){
+    return this.http.get<Event>(`${environment.apiUrl}/event/${id}`);
   }
 
-  searchEvents(query:string){
-    let matchedEvents: Event[] = [];
-    for(let event of this.events){
-      if(event.name.toLowerCase().includes(query)){
-        matchedEvents.push(event)
-      }
-    }
-    return matchedEvents;
-  }
+  //post /event
+  //patch /event/{event_id}
+ 
 }
