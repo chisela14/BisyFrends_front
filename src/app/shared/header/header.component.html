@@ -18,13 +18,14 @@
         
             
         <div class="dropdown">
-            <!-- <button class="btn btn-primary" data-toggle="tooltip" title="Cambiar idioma de la página">
+            <!-- https://stackblitz.com/edit/angular-simple-ngx-bootstrap-k1z7yq?file=src%2Fapp%2Fapp.module.ts
+                <button class="btn btn-primary" data-toggle="tooltip" title="Cambiar idioma de la página">
                 <i class="fa-solid fa-language"></i></button> -->
-            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
-            <i class="fa-solid fa-circle-user"></i> Usuario</button>
+            <button class="btn btn-primary dropdown-toggle" [ngClass]="userActive()" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-circle-user"></i> {{username}}</button>
 
             <div class="dropdown-menu">
-                <a class="dropdown-item" [routerLink]="['/user']">Configuración</a>
+                <a class="dropdown-item" [routerLink]="['/user']" >Configuración</a>
                 <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
             </div>
         </div>

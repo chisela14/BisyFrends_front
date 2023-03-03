@@ -8,7 +8,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router:Router) { }
+  username: string;
+  constructor(private authService: AuthService, private router:Router) { 
+    this.username  = this.authService.user;
+  }
 
   ngOnInit(): void {
   }
@@ -29,6 +32,13 @@ export class HeaderComponent implements OnInit {
       result = true;
     }
     return result;
+  }
+
+  userActive(){
+    if(this.router.url.includes('user')){
+      return "btn-light";
+    }
+    return
   }
 
 }
