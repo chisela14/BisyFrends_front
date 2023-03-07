@@ -24,7 +24,7 @@
             <button class="btn btn-primary dropdown-toggle" [ngClass]="userActive()" data-bs-toggle="dropdown">
             <i class="fa-solid fa-circle-user"></i> {{username}}</button>
 
-            <div class="dropdown-menu">
+            <div class="dropdown-menu dropdown-menu-end">
                 <a class="dropdown-item" [routerLink]="['/user']" >Configuración</a>
                 <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
             </div>
@@ -36,9 +36,9 @@
 
 <nav class="navbar navbar-light bg-primary" *ngIf="!setHeader()"><!--Se muestra si el usuario no está registrado-->
     <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/home']">
-            <button class="btn btn-dark" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
-                logo   
+        <a class="navbar-brand" [routerLink]="['/']">
+            <button class="btn p-1" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+                <img src="../../../assets/logo.png" alt="Bisy Frends logo" height="70"> 
             </button>
         </a>
         <div>
