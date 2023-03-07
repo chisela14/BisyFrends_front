@@ -1,8 +1,8 @@
-<nav class="navbar navbar-light bg-primary" *ngIf="setHeader()"><!--Se muestra si el usuario está registrado-->
-    <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/home']">
-            <button class="btn btn-dark" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
-             logo   
+<nav class="navbar navbar-light bg-primary p-0" *ngIf="setHeader()"><!--Se muestra si el usuario está registrado-->
+    <div class="container-fluid mx-4">
+        <a class="navbar-brand" [routerLink]="['/']">
+            <button class="btn p-1" routerLinkActive="btn-light" [routerLinkActiveOptions]="{exact: true}">
+                <img src="../../../assets/logo.png" alt="Bisy Frends logo" height="70"> 
             </button>
         </a>
         <div>
