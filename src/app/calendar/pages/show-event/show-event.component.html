@@ -1,32 +1,54 @@
 
 
 <div class="container-fluid p-0 h-100 d-flex flex-column pt-4" *ngIf="event">
-    <div class="row">
+    <div class="row gx-5">
         <div class="col-9">
-            <h3>Información del evento</h3>
-            <div class="row d-flex flex-column">
-                <div>
-                    {{event.name}}
+            <h3 class="text-center">Información del evento</h3>
+            <div class="row d-flex flex-column gy-3">
+                <div class="pr-4">
+                    <h4>{{event.name}}
                     <button class="btn btn-warning float-end" [routerLink]="['update']">
-                        <i class="fa-solid fa-pen-to-square"></i> Editar evento</button>
+                        <i class="fa-solid fa-pen-to-square"></i> Editar evento</button></h4>
                 </div>
-                <div>
-                    <p>{{event.info}}</p>
+                
+                <div class="form-group">
+                    <label class="text-info">Información</label>
+                    <span class="form-control-plaintext">{{event.info}}</span>
                 </div>
-                <div>
-                    <p>{{event.attendance}}</p>
-                    <p>{{event.duration}}</p>
-                    <p>{{event.finalDate}}</p>
+                <div class="container-fluid d-flex px-12">
+                    <div class="row w-100">
+                        <div class="form-group col-auto">
+                            <label class="text-info">Porcentaje de asistencia estimado</label>
+                            <span class="form-control-plaintext">{{event.attendance}}</span>
+                        </div>
+
+                        <div class="form-group col-auto">
+                            <label class="text-info">Duración(horas)</label>
+                            <span class="form-control-plaintext">{{event.duration}}</span>
+                        </div>
+
+                        <div class="form-group col-auto">
+                            <label class="text-info">Fecha final</label>
+                            <span class="form-control-plaintext">{{event.finalDate}}</span>
+                        </div>
+                    </div>
+                    
                 </div>
+                
             </div>
-            <div class="row">
-                <div>
-                    calendario
+            <div class="row pt-3">
+                <div><!--cambiar formato-->
+                    <h5>calendario</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngFor="let date of event.calendar">
+                            {{date.period}} {{date.votes}} {{date.freeForAll}}  
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="col">
-            <h3>Participantes</h3>
+            <h3 class="text-center">Participantes</h3>
             <ul class="nav flex-column">
                 <li class="nav-item" *ngFor="let participant of event.participation">
                     {{participant.user.username}} ({{participant.confirmed?'confirmado':'sin confirmar'}})
