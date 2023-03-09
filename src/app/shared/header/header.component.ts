@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   onLoginPage():boolean{
     let result = false;
-    if(this.router.url.includes('login')){
+    if(this.router.url.includes('login') || this.router.url.includes('register')){
       result = true;
     }
     return result;

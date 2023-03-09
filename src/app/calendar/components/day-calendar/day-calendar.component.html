@@ -9,11 +9,13 @@
         </div>
     </div>
     <div class="row overflow-scroll h-75">
-        <table class="table">
+        <table class="table" *ngIf="dayEvents!=undefined">
             <tbody>
-                <tr *ngFor="let hour of [].constructor(24); let i = index">
+                <tr *ngFor="let hour of [].constructor(24); let i = index;">
                     <th>{{i}}:00</th>
-                    <td *ngFor="let hour of [].constructor(7)"></td>
+                    <td>
+                        <button class="btn btn-warning" *ngIf="freeHour(i)" [routerLink]="[cellEvent?.id]">{{cellEvent?.name}}</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

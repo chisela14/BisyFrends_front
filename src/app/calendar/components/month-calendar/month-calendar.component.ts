@@ -6,7 +6,7 @@ import { EventService } from '../../services/event.service';
 
 export interface DateEvent{
   date: Date,
-  event: Event | null
+  event: Event[] | undefined
 }
 
 @Component({
@@ -31,7 +31,7 @@ export class MonthCalendarComponent implements OnInit {
     this.weekDays = this.generateWeek(this.today, 'es');
     this.monthWeeks = this.weekCount(this.today.getFullYear(), this.today.getMonth(), this.today.getDay());
     this.generateMonth(this.today);
-    this.setEvents();
+    this.getUserEvents();
   }
 
   //generar mes en un mapa a partir de una fecha
@@ -69,7 +69,7 @@ export class MonthCalendarComponent implements OnInit {
         nextDay = new Date(date.getFullYear(), date.getMonth(), nextMonthDay);
       }
       nextMonthDay += 1;
-      dateEvent = {date: nextDay, event: null}
+      dateEvent = {date: nextDay, event: undefined}
       monthArray.push(dateEvent)
     }
     //introduzco el array del mes en el mapa
@@ -132,34 +132,51 @@ export class MonthCalendarComponent implements OnInit {
     this.focusedMonth.clear();
     this.generateWeek(newMonth, 'es');
     this.generateMonth(newMonth);
+    this.getUserEvents();
   }
 
-
+  convertfinalDateStrToDate(str:string):Date{
+    let eventDate = str.split(" ")[0];
+    let [day, month, year] = eventDate.split("-");
+    let fDate = new Date(Number(year), Number(month)-1, Number(day));
+    return fDate;
+  }
   
   //conseguir eventos del usuario haciendo uso del servicio
   getUserEvents(){
     this.eventService.getUserEvents()
     .subscribe({
-      next: (resp:Event[])=>{
-        console.log(resp)
-        this.userEvents=resp},
+      next: (resp:Event[])=>{//filtro la respuesta para guardar los eventos que ocurran este mes
+        this.userEvents= resp.filter((event)=>{//finalDate: "28-03-2023 00:00:00"
+          let fDate = this.convertfinalDateStrToDate(event.finalDate);
+          let currentWeekReference = this.focusedMonth.get(1);
+          return fDate.getMonth()===currentWeekReference![0].date.getMonth() && fDate.getFullYear()===currentWeekReference![0].date.getFullYear()
+        })
+        this.setEvents()},
       error: () => {Swal.fire("Error al recuperar los eventos del usuario")}
     })
-    
-    console.log(this.userEvents)
   }
 
   //función para añadir los eventos del usuario al array
   setEvents(){
-    this.getUserEvents();
-    //añadirlos al mapa
-    //for(let event of this.userEvents){
-      //console.log(event)
-    //}
-
-    // let week: DateEvent[] | undefined = this.focusedMonth.get(1);
-    // week![0].event = this.testEvent;
-    // this.focusedMonth.set(1, week!);
+    //recorro los eventos
+    for(let event of this.userEvents){
+      //si el dia final del evento coincide con alguno de los dias del focused month le añado el evento (de momento los eventos sin día final se verán en los grupos)
+      let fDate = this.convertfinalDateStrToDate(event.finalDate);
+      for(let week of this.focusedMonth.values()){
+        //encontrar en el array un objeto de DateEvent cuyo Date sea igual al dia final (cuidado con los formatos)
+        let day = week.find(({date})=> date.getTime()===fDate.getTime());
+        if(day!=undefined){
+          let dayIndex = week.findIndex((obj => obj === day));
+          if(week[dayIndex].event !=undefined){
+            week[dayIndex].event!.push(event);
+          }else{
+            week[dayIndex].event! = [event];
+          }
+          
+        }
+      }
+    }
   }
 
 }

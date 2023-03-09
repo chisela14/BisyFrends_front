@@ -19,9 +19,12 @@
                 <tr *ngFor="let week of focusedMonth.keys()">
                     <td *ngFor="let day of focusedMonth.get(week)" [ngClass]="{'bg-warning': day.event}">
                         <div *ngIf="day.event != null">
-                            <a [routerLink]="[day.event.id]"><!--event-->
-                                <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">
-                                    {{day.date.getDate()}}
+                            <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">
+                                {{day.date.getDate()}}
+                            </span>
+                            <a *ngFor="let event of day.event; let i=index"><!--event-->
+                                <span [routerLink]="[event.id]" data-toggle="tooltip" title="Ver evento {{i+1}}">
+                                    <i class="fa-solid fa-circle float-right" size="5" [ngClass]="i/2 == 0 ? 'text-info' : 'text-primary'"></i>
                                 </span>
                             </a>
                         </div>
