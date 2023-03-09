@@ -1,6 +1,37 @@
-<button class="btn btn-warning" [routerLink]="['update']">Editar evento</button>
-<p>{{testEvent.name}}</p>
-<p>{{testEvent.info}}</p>
-<p>{{testEvent.attendance}}</p>
-<p>{{testEvent.duration}}</p>
-<p>{{testEvent.finalDate}}</p>
+
+
+<div class="container-fluid p-0 h-100 d-flex flex-column pt-4" *ngIf="event">
+    <div class="row">
+        <div class="col-9">
+            <h3>Información del evento</h3>
+            <div class="row d-flex flex-column">
+                <div>
+                    {{event.name}}
+                    <button class="btn btn-warning float-end" [routerLink]="['update']">
+                        <i class="fa-solid fa-pen-to-square"></i> Editar evento</button>
+                </div>
+                <div>
+                    <p>{{event.info}}</p>
+                </div>
+                <div>
+                    <p>{{event.attendance}}</p>
+                    <p>{{event.duration}}</p>
+                    <p>{{event.finalDate}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    calendario
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h3>Participantes</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item" *ngFor="let participant of event.participation">
+                    {{participant.user.username}} ({{participant.confirmed?'confirmado':'sin confirmar'}})
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

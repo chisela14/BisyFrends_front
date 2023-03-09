@@ -19,7 +19,7 @@
                 <tr *ngFor="let week of focusedMonth.keys()">
                     <td *ngFor="let day of focusedMonth.get(week)" [ngClass]="{'bg-warning': day.event}">
                         <div *ngIf="day.event != null">
-                            <a routerLink="day.event.id"><!--event-->
+                            <a [routerLink]="[day.event.id]"><!--event-->
                                 <span [ngClass]="{'text-danger': day.date.getDate() === today.getDate()}">
                                     {{day.date.getDate()}}
                                 </span>

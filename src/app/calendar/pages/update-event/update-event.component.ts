@@ -14,17 +14,8 @@ export class UpdateEventComponent implements OnInit {
   //recuperar evento de la ruta
   constructor(private fb:FormBuilder, private route: ActivatedRoute) { }
 
-   //para probar el select
-   groups: string[] = ["daw", "fotografía"];
-
-  testEvent: Event = {
-    id: 1,
-    name: 'Cena',
-    info: 'En el bar Manolo',
-    duration: 2,
-    attendance: 100,
-    finalDate: new Date('2023-02-17')
-  };
+  //para probar el select
+  groups: string[] = ["daw", "fotografía"];
 
   updateEvForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],

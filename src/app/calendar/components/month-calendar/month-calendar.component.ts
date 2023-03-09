@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, of, switchMap } from 'rxjs';
 import { Event } from 'src/app/interfaces/event.interface';
+import Swal from 'sweetalert2';
 import { EventService } from '../../services/event.service';
 
 export interface DateEvent{
@@ -13,17 +15,6 @@ export interface DateEvent{
 })
 export class MonthCalendarComponent implements OnInit {
 
-  //hasta que recupere los datos de la api
-  testEvent: Event = {
-    id: 1,
-    name: 'Cena',
-    info: 'En el bar Manolo',
-    duration: 2,
-    attendance: 100,
-    finalDate: new Date('2023-02-17')
-  };
-
-
   today: Date;
   constructor(private eventService:EventService) {
     this.today = new Date();
@@ -34,6 +25,8 @@ export class MonthCalendarComponent implements OnInit {
   //focusedMonth: Date[] = [];
   focusedMonth:Map<Number, DateEvent[]> = new Map<Number, DateEvent[]>();
   monthWeeks: number = 4;
+  userEvents!:Event[];
+
   ngOnInit(): void {
     this.weekDays = this.generateWeek(this.today, 'es');
     this.monthWeeks = this.weekCount(this.today.getFullYear(), this.today.getMonth(), this.today.getDay());
@@ -141,11 +134,32 @@ export class MonthCalendarComponent implements OnInit {
     this.generateMonth(newMonth);
   }
 
+
+  
+  //conseguir eventos del usuario haciendo uso del servicio
+  getUserEvents(){
+    this.eventService.getUserEvents()
+    .subscribe({
+      next: (resp:Event[])=>{
+        console.log(resp)
+        this.userEvents=resp},
+      error: () => {Swal.fire("Error al recuperar los eventos del usuario")}
+    })
+    
+    console.log(this.userEvents)
+  }
+
   //función para añadir los eventos del usuario al array
   setEvents(){
-    let week: DateEvent[] | undefined = this.focusedMonth.get(1);
-    week![0].event = this.testEvent;
-    this.focusedMonth.set(1, week!);
+    this.getUserEvents();
+    //añadirlos al mapa
+    //for(let event of this.userEvents){
+      //console.log(event)
+    //}
+
+    // let week: DateEvent[] | undefined = this.focusedMonth.get(1);
+    // week![0].event = this.testEvent;
+    // this.focusedMonth.set(1, week!);
   }
 
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8082'
+  apiUrl: 'https://bisyfrendsback-production.up.railway.app'
 };
 
 /*
