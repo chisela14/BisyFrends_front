@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { UserGroup } from 'src/app/interfaces/user.interface';
+import { User, UserGroup } from 'src/app/interfaces/user.interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  //hasta que recupere los datos de la api
-  users: UserGroup[] = [
-    {username: 'ioliasa', picture: ''},
-    {username: 'joadelvia', picture: ''}
-  ]
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  getUsers():UserGroup[]{
-    return this.users;
+  //no se hace nada con la respuesta
+  addUser(user:User, file:File){
+    const headers = new HttpHeaders({'Content-Type': 'multipart/form-data'})
+    return this.http.post(`${environment.apiUrl}/signup`, [user, file], {headers});
   }
 }

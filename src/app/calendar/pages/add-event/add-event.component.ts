@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Event } from 'src/app/interfaces/event.interface';
 import { Group } from 'src/app/interfaces/group.interface';
 import Swal from 'sweetalert2';
 import { GroupService } from '../../../group/services/group.service';
 import { GroupDto } from '../../../interfaces/group.interface';
+import { EventService } from '../../services/event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-event',
@@ -11,7 +14,7 @@ import { GroupDto } from '../../../interfaces/group.interface';
 })
 export class AddEventComponent implements OnInit {
 
-  constructor(private fb:FormBuilder, private groupService:GroupService) { }
+  constructor(private fb:FormBuilder, private groupService:GroupService, private eventService:EventService, private router:Router) { }
 
   addEvForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -34,8 +37,8 @@ export class AddEventComponent implements OnInit {
     return null;
   }
 
-   //para probar el select
-   groups!: GroupDto[];
+  
+  groups!: GroupDto[];
 
   ngOnInit(): void {
     this.groupService.getGroups()
@@ -52,8 +55,20 @@ export class AddEventComponent implements OnInit {
     //return this.addEvForm.controls[field].errors && this.addEvForm.controls[field].touched;
   }
 
+  //formato de fecha necesario: "finalDate": "04-04-2024 00:00:00"
   save(){
-    console.log("enviado")
+    let date = new Date(this.addEvForm.controls['date'].value)
+    let formatDate:string = `${date.getDate()}-${date.getMonth()-1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    let event:Event = { id:0, name: this.addEvForm.controls['name'].value, info: this.addEvForm.controls['info'].value,
+      duration: this.addEvForm.controls['duration'].value, attendance: this.addEvForm.controls['attendance'].value,
+      finalDate: formatDate, group: {id:0}, calendar: [], participation: []};
+    let group = this.addEvForm.controls['group'].value;
+    console.log(group)
+    this.eventService.addEvent(event, group)
+    .subscribe({
+      next:()=>this.router.navigateByUrl('/schedule'),
+      error:()=>{Swal.fire("No se podido añadir el evento")}
+    });
   }
 
 }

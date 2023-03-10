@@ -18,8 +18,4 @@ export class GroupService {
     return this.http.get<GroupDto[]>(`${environment.apiUrl}/user/groups`);
   }
   
-  searchGroups(query:string){
-    return this.http.get<GroupDto[]>(`${environment.apiUrl}/user/groups?q=${query}`);
-  }
-  
 }

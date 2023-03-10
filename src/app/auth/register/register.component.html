@@ -17,6 +17,19 @@
                     </span>
                 </div>
             </div>
+
+            <div class="mt-2">
+                <label class="control-label" for="email">Email</label>  
+                <div>
+                    <input id="email" type="email" placeholder="email@mail.com" class="form-control input-md" 
+                        name="email"
+                        [(ngModel)]="user.email" 
+                        required>
+                    <span class="text-danger" *ngIf="notValid('email')">
+                        El email es obligatorio
+                    </span>
+                </div>
+            </div>
     
             <div class="mt-2">
                 <label class="control-label" for="username">Usuario</label>  

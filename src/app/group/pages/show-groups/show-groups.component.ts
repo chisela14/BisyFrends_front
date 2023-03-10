@@ -24,20 +24,17 @@ export class ShowGroupsComponent implements OnInit {
 
   
   searchGroups(input:string){
-    this.groupService.searchGroups(input)
-    .subscribe({
-      next:(resp)=>{
-        if(resp.length){
-          this.groups=resp
-        }else{
-          Swal.fire("No se encontraron grupos cuyo nombre contenga '" + input + "'")
-        }
-        
-      },
-      error:(err)=>{
-        Swal.fire("Fallo al buscar grupos")
+    let matchedGroups: GroupDto[] = [];
+    for(let group of this.groups){
+      if(group.name.toLowerCase().includes(input)){
+        matchedGroups.push(group)
       }
-    })
+    }
+    if(matchedGroups.length){
+      this.groups = matchedGroups;
+    }else{
+      Swal.fire("No se encontraron grupos que incluyan en su nombre el término '" + input + "'")
+    }
   }
 
   selectedGroup!: GroupDto;

@@ -1,3 +1,4 @@
+<div class="mt-4" *ngIf="event!=undefined">
 <h2>Editar evento</h2>
 <hr>
 
@@ -80,7 +81,7 @@
                 <div class="col-sm-9">
                     <select class="form-select" formControlName="group">
                         <option value="default">Selecciona un grupo...</option>
-                        <option *ngFor="let group of groups" value="group">{{group}}</option>
+                        <option *ngFor="let group of groups" value="{{group.id}}">{{group.name}}</option>
                     </select>
                      
                     <span class="form-text text-danger" *ngIf="isNotValid('group')">
@@ -108,5 +109,5 @@
 
     </div>
 </div>
-
+</div>
 

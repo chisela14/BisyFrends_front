@@ -61,7 +61,7 @@ export class DayCalendarComponent implements OnInit {
     .subscribe({
       next: (resp:Event[])=>{//filtro la respuesta para guardar los eventos que ocurran hoy
         this.userEvents= resp.filter((event)=>{//finalDate: "28-03-2023 00:00:00"
-          let fDate = this.convertfinalDateStrToDate(event.finalDate);
+          let fDate = this.convertfinalDateStrToDate(event?.finalDate);
           return fDate.getDate()===this.day.getDate() && fDate.getMonth()===this.day.getMonth() && fDate.getFullYear()===this.day.getFullYear()
         })
         for(let event of this.userEvents){

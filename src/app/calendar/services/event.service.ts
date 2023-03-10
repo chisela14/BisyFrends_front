@@ -12,16 +12,24 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
-  //get /event/{event_id}
+  //conseguir un evento
   getEvent(id:number){
     return this.http.get<Event>(`${environment.apiUrl}/event/${id}`);
   }
 
-  //post /event
-  //patch /event/{event_id}
-
+  //conseguir eventos del usuario registrado
   getUserEvents():Observable<Event[]>{
     return this.http.get<Event[]>(`${environment.apiUrl}/user/events`);
+  }
+
+  //añadir evento
+  addEvent(event:Event, groupId:number){
+    return this.http.post(`${environment.apiUrl}/event?group=${groupId}`, {event});
+  }
+
+  //actualizar evento
+  updateEvent(event:Event){
+    return this.http.patch(`${environment.apiUrl}/event/${event.id}`, {event});
   }
  
 }
